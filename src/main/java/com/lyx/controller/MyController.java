@@ -1,10 +1,10 @@
 package com.lyx.controller;
 
-import com.lyx.common.CommonResult;
-import com.lyx.thrid.hutool.core.util.IdUtil;
-import com.lyx.thrid.hutool.core.util.StrUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import top.liyanxing.common.CommonResult;
 
 @RestController
 public class MyController
