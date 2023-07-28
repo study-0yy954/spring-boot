@@ -1,4 +1,4 @@
-package com.lyx.controller;
+package top.liyanxing.springbootstudy.controller;
 
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
