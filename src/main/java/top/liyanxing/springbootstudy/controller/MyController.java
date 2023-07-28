@@ -29,10 +29,10 @@ public class MyController
         JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
                                         .withIdentity(JOB_NAME, JOB_GROUP)
                                         .build();
-        SimpleTrigger trigger = TriggerBuilder.newTrigger()
-                                              .withIdentity(TRIGGER_NAME, TRIGGER_GROUP)
-                                              .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(3))
-                                              .build();
+        CronTrigger trigger = TriggerBuilder.newTrigger()
+                                            .withIdentity(TRIGGER_NAME, TRIGGER_GROUP)
+                                            .withSchedule(CronScheduleBuilder.cronSchedule("*/5 * * * * ?"))
+                                            .build();
         scheduler.scheduleJob(jobDetail, trigger);
         scheduler.start();
 
