@@ -1,10 +1,15 @@
 package top.liyanxing.springbootstudy.controller;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.date.Week;
+import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import top.liyanxing.common.CommonResult;
 import top.liyanxing.springbootstudy.job.HelloJob;
@@ -23,19 +28,26 @@ public class MyController
 
     private static final String TRIGGER_GROUP = "TRIGGER_GROUP";
 
-    @GetMapping("/start")
-    public CommonResult<String> zTest() throws SchedulerException
+    @GetMapping("/zTest")
+    public CommonResult<String> zTest(@RequestParam String startAt) throws SchedulerException
     {
         JobDetail jobDetail = JobBuilder.newJob(HelloJob.class)
                                         .withIdentity(JOB_NAME, JOB_GROUP)
                                         .build();
-        CronTrigger trigger = TriggerBuilder.newTrigger()
-                                            .withIdentity(TRIGGER_NAME, TRIGGER_GROUP)
-                                            .withSchedule(CronScheduleBuilder.cronSchedule("*/5 * * * * ?"))
-                                            .build();
+        SimpleTrigger trigger = TriggerBuilder.newTrigger()
+                                             .withIdentity(TRIGGER_NAME, TRIGGER_GROUP)
+                                             .withSchedule(SimpleScheduleBuilder.simpleSchedule().withMisfireHandlingInstructionFireNow())
+                                             .startAt(DateUtil.parseDateTime(startAt))
+                                             .build();
         scheduler.scheduleJob(jobDetail, trigger);
-        scheduler.start();
 
-        return CommonResult.successData("启动成功");
+        return CommonResult.successData(DateUtil.now());
     }
+
+    // @GetMapping("/start")
+    // public CommonResult<String> start() throws SchedulerException
+    // {
+    //     scheduler.start();
+    //     return CommonResult.successData(DateUtil.now());
+    // }
 }
