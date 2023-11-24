@@ -1,0 +1,16 @@
+spring:
+    datasource:
+        dynamic:
+            primary: db1
+            strict: false
+            datasource:
+                db1:
+                    driver-class-name: com.mysql.cj.jdbc.Driver
+                    url: jdbc:mysql://www.liyanxing.top:3306/studydb_db1?serverTimezone=Asia/Shanghai
+                    username: leeyx
+                    password: leeyx0109
+                db2:
+                    driver-class-name: com.mysql.cj.jdbc.Driver
+                    url: jdbc:mysql://www.liyanxing.top:3306/studydb_db1?serverTimezone=Asia/Shanghai
+                    username: leeyx
+                    password: leeyx0109
