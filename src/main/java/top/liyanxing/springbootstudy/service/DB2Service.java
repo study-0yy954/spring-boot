@@ -1,41 +1,29 @@
 package top.liyanxing.springbootstudy.service;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.lang.Console;
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionCallbackWithoutResult;
-import org.springframework.transaction.support.TransactionTemplate;
-import top.liyanxing.common.CommonResult;
 import top.liyanxing.springbootstudy.entity.House;
 import top.liyanxing.springbootstudy.entity.Student;
 import top.liyanxing.springbootstudy.mapper.HouseMapper;
 import top.liyanxing.springbootstudy.mapper.StudentMapper;
 
-import java.beans.Transient;
-import java.util.WeakHashMap;
-
+@DS("db2")
 @Service
-public class MyService
+public class DB2Service
 {
     @Autowired
-    public DB1Service db1Service;
+    private HouseMapper houseMapper;
 
-    @Autowired
-    public DB2Service db2Service;
-
-    @Transactional
-    public CommonResult<String> test1()
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void save()
     {
-        db2Service.save();
-        db1Service.save();
-
-        return CommonResult.successData("成功");
+        House house = House.getInstance();
+        house.setAddress(StrUtil.concat(true, "北京天通苑 ", DateUtil.now()));
+        houseMapper.insert(house);
     }
 }

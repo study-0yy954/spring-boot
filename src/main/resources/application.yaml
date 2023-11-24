@@ -11,6 +11,6 @@ spring:
                     password: leeyx0109
                 db2:
                     driver-class-name: com.mysql.cj.jdbc.Driver
-                    url: jdbc:mysql://www.liyanxing.top:3306/studydb_db1?serverTimezone=Asia/Shanghai
+                    url: jdbc:mysql://www.liyanxing.top:3306/studydb_db2?serverTimezone=Asia/Shanghai
                     username: leeyx
                     password: leeyx0109

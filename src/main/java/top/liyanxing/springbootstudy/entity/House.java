@@ -15,4 +15,10 @@ public class House
 
     @TableField("address")
     private String address;
+
+    public static House getInstance()
+    {
+        House obj = new House();
+        return obj;
+    }
 }
