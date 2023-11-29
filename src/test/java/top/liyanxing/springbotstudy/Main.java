@@ -5,25 +5,35 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws JsonProcessingException
     {
         // 读取数据
         Map<String, String> customerDataMap = getCustomerData();
         List<AccountEntity> accountDataList = getAccountData();
 
-        // 赋值 organizationId // TODO 李艳兴 有个没有赋值上
+        // 赋值 organizationId
         for (AccountEntity el : accountDataList)
         {
             el.setOrganizationId(customerDataMap.get(el.getOrganizationName()));
         }
-        Console.log("输出数据【{}】", accountDataList);
+
+        // 转换为json
+        ObjectMapper oMapper = new ObjectMapper();
+        List<String> jsonList = CollUtil.newArrayList();
+        for (AccountEntity el : accountDataList)
+        {
+            jsonList.add(oMapper.writeValueAsString(el));
+        }
+        Console.log("输出数据【{}】", jsonList);
     }
 
     private static Map<String, String> getCustomerData()

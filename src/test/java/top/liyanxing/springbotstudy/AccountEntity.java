@@ -1,15 +1,16 @@
 package top.liyanxing.springbotstudy;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Getter
 @Setter
 @ToString
 public class AccountEntity
 {
+    @JsonIgnore
     private String organizationName;
 
     private String loginName;
