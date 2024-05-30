@@ -1,4 +1,4 @@
-package top.liyanxing.springbootstudy;
+package top.liyanxing.springbootstudyuse;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
