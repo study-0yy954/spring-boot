@@ -8,9 +8,12 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-public class Student
+public class TbAccount
 {
-    private String name;
 
-    private Date birthday;
+    private String loginName;
+
+    private String password;
+
+    private Boolean enable;
 }
