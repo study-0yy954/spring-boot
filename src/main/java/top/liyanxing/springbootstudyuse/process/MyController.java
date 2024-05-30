@@ -1,4 +1,4 @@
-package top.liyanxing.springbootstudyuse.controller;
+package top.liyanxing.springbootstudyuse.process;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +11,9 @@ public class MyController
 {
     @Autowired
     private ApplicationContext applicationContext;
+
+    @Autowired
+    private MyService myService;
 
     @GetMapping("/beans")
     public CommonResult<String[]> beans()

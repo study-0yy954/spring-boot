@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import top.liyanxing.springbootstudyuse.Application;
-import top.liyanxing.springbootstudyuse.controller.MyController;
+import top.liyanxing.springbootstudyuse.process.MyController;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)

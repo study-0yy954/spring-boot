@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://www.liyanxing.top:3306/db_account_studyuser?serverTimezone=Asia/Shanghai
+    username: leeyx
+    password: leeyx0109
