@@ -34,7 +34,7 @@ public class ObjectMapperOpt
         }
         catch (Exception e)
         {
-            throw RuntimeExceptionOpt.getInstance("JsonNode置换为对象出错【{}】【{}】", n, e.getMessage());
+            throw RuntimeExceptionOpt.getInstance("JsonNode转换为对象出错【{}】【{}】", n, e.getMessage());
         }
     }
 }

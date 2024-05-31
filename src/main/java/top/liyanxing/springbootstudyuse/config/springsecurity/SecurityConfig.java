@@ -12,11 +12,14 @@ public class SecurityConfig
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
-            .antMatchers("/public/**").permitAll() // 不拦截public开头的路径
-            .anyRequest().authenticated(); // 其他的路径全拦截
-        http.formLogin(); // 添加登录表单
-        http.httpBasic(); // 使用基本授权方式
-        http.csrf(csrf -> csrf.disable()); // 关闭csrf防护
+            .antMatchers("/public/**").permitAll()
+            .anyRequest().authenticated();
+
+        http.formLogin()
+            .successHandler(new SecurityAuthenticationSuccessHandler());
+
+        http.httpBasic();
+        http.csrf(csrf -> csrf.disable());
         return http.build();
     }
 }

@@ -20,12 +20,15 @@ public class SecurityAuthenticationSuccessHandler implements AuthenticationSucce
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
     {
+        // 获取用户数据
         Object principal = authentication.getPrincipal();
+
+        // 生成json
         CommonResult<Object> resut = CommonResult.successData(principal);
+        String jsonStr = SpringUtil.getBean(ObjectMapperOpt.class).getObjectMapper().writeValueAsString(request);
 
-        ObjectMapperOpt bean = SpringUtil.getBean(ObjectMapperOpt.class);
-
+        // 返回给前端数据
         response.setContentType(MimeTypeUtils.APPLICATION_JSON_VALUE);
-        response.getWriter().println();
+        response.getWriter().println(jsonStr);
     }
 }
