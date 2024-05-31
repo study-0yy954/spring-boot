@@ -16,12 +16,14 @@ public class MyService
 
     public CommonResult<String> saveAccount(TbAccount account)
     {
+        // 创建一个UserDetail对象，创建这个对象主要是为了用它的加密方法获取加密后的密码
         UserDetails userDetails = User.withDefaultPasswordEncoder()
                                       .username(account.getLoginName())
                                       .password(account.getPassword())
                                       .roles("ADMIN")
                                       .build();
 
+        // 将账号插入表
         TbAccount accountToSave = TbAccount.getInstance();
         accountToSave.setLoginName(account.getLoginName());
         accountToSave.setPassword(userDetails.getPassword());
