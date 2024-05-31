@@ -22,4 +22,10 @@ public class TbAccount
 
     @TableField("enable")
     private Boolean enable;
+
+    public static TbAccount getInstance()
+    {
+        TbAccount obj = new TbAccount();
+        return obj;
+    }
 }
