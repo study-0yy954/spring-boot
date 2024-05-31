@@ -1,8 +1,8 @@
 package top.liyanxing.springbootstudyuse.config.springsecurity;
 
 import cn.hutool.extra.spring.SpringUtil;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import top.liyanxing.common.CommonResult;
 import top.liyanxing.springbootstudyuse.common.baseclass.ObjectMapperOpt;
 
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class SecurityAuthenticationSuccessHandler implements AuthenticationSuccessHandler
+public class SecurityAuthenticationFailureHandler implements AuthenticationFailureHandler
 {
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException
     {
-        // 获取用户数据
-        Object principal = authentication.getPrincipal();
+        // 获取登录失败原因
+        String localizedMessage = exception.getLocalizedMessage();
 
         // 生成json
-        CommonResult<Object> result = CommonResult.successData(principal);
+        CommonResult<Object> result = CommonResult.errorMsg(localizedMessage);
         String jsonStr = SpringUtil.getBean(ObjectMapperOpt.class).getObjectMapper().writeValueAsString(result);
 
         // 返回给前端数据

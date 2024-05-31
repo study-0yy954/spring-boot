@@ -16,7 +16,8 @@ public class SecurityConfig
             .anyRequest().authenticated();
 
         http.formLogin()
-            .successHandler(new SecurityAuthenticationSuccessHandler());
+            .successHandler(new SecurityAuthenticationSuccessHandler())
+            .failureHandler(new SecurityAuthenticationFailureHandler());
 
         http.httpBasic();
         http.csrf(csrf -> csrf.disable());
