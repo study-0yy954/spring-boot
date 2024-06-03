@@ -1,4 +1,4 @@
-package top.liyanxing.springbootstudyuse.config.springmvc;
+package top.liyanxing.springbootstudyuse.config.spring;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
 import lombok.extern.slf4j.Slf4j;

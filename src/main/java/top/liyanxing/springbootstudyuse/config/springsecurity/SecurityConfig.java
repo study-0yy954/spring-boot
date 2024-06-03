@@ -23,10 +23,9 @@ public class SecurityConfig
             .failureHandler(new SecurityAuthenticationFailureHandler());
 
         http.logout(logout -> logout.logoutSuccessHandler(new SecurityLogoutSuccessHandler()));
-
         http.exceptionHandling(cus -> cus.authenticationEntryPoint(new SecurityAuthenticationEntryPoint()));
-
         http.httpBasic();
+        // http.cors();
         http.csrf(csrf -> csrf.disable());
         return http.build();
     }

@@ -2,7 +2,6 @@ package top.liyanxing.springbootstudyuse.process;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,5 +28,11 @@ public class MyController
     public CommonResult<String> saveAccount(@RequestBody TbAccount account)
     {
         return myService.saveAccount(account);
+    }
+
+    @GetMapping("/public/test")
+    public CommonResult<String> test()
+    {
+        return CommonResult.successData("你访问了一个不需要认证的接口");
     }
 }
