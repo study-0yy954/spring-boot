@@ -25,7 +25,7 @@ public class SecurityConfig
         http.logout(logout -> logout.logoutSuccessHandler(new SecurityLogoutSuccessHandler()));
         http.exceptionHandling(cus -> cus.authenticationEntryPoint(new SecurityAuthenticationEntryPoint()));
         http.httpBasic();
-        // http.cors();
+        http.cors();
         http.csrf(csrf -> csrf.disable());
         return http.build();
     }
