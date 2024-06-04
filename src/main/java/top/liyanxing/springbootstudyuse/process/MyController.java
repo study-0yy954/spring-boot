@@ -24,6 +24,12 @@ public class MyController
         return CommonResult.successData(applicationContext.getBeanDefinitionNames());
     }
 
+    @GetMapping("/getUserInfo")
+    public CommonResult<String> getUserInfo()
+    {
+        return myService.getUserInfo();
+    }
+
     @PostMapping("/public/saveAccount")
     public CommonResult<String> saveAccount(@RequestBody TbAccount account)
     {
@@ -34,11 +40,5 @@ public class MyController
     public CommonResult<String> test()
     {
         return CommonResult.successData("你访问了一个不需要认证的接口");
-    }
-
-    @GetMapping("/getUserInfo")
-    public CommonResult<String> getUserInfo()
-    {
-        return myService.getUserInfo();
     }
 }
