@@ -35,4 +35,10 @@ public class MyController
     {
         return CommonResult.successData("你访问了一个不需要认证的接口");
     }
+
+    @GetMapping("/getUserInfo")
+    public CommonResult<String> getUserInfo()
+    {
+        return myService.getUserInfo();
+    }
 }
