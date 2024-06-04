@@ -48,14 +48,16 @@ public class MyService
      */
     public CommonResult<String> getUserInfo()
     {
+        // 获取 Authentication 对象
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        Object principal = authentication.getPrincipal();
-        Object credentials = authentication.getCredentials();
-        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        String name = authentication.getName();
+        // 通过 Authentication 对象获取信息
+        Object principal = authentication.getPrincipal(); // 账号主要信息
+        Object credentials = authentication.getCredentials(); // 账号凭证，例如密码，因为SpringSecurity默认脱敏，所以获取到是null.
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities(); // 账号授权信息.
+        String name = authentication.getName(); // 账号登录名
 
-        String result = StrUtil.format("【{}】\n【{}】\n【{}】\n【{}】", principal, credentials, authorities, name);
+        String result = StrUtil.format("【{}】【{}】【{}】【{}】", principal, credentials, authorities, name);
         return CommonResult.successData(result);
     }
 }
