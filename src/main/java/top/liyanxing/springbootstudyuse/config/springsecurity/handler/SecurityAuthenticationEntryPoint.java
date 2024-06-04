@@ -1,4 +1,4 @@
-package top.liyanxing.springbootstudyuse.config.springsecurity;
+package top.liyanxing.springbootstudyuse.config.springsecurity.handler;
 
 import cn.hutool.extra.spring.SpringUtil;
 import org.springframework.security.core.AuthenticationException;
