@@ -13,6 +13,8 @@ public class SecurityConfig
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
+            .antMatchers("/user/list").hasAuthority("USER_LIST")
+            .antMatchers("/user/add").hasAuthority("USER_ADD")
             .antMatchers("/public/**").permitAll()
             .anyRequest().authenticated();
 
@@ -22,7 +24,17 @@ public class SecurityConfig
 
         http.sessionManagement(session -> session.maximumSessions(1).expiredSessionStrategy(new SecuritySessionInformationExpiredStrategy()));
         http.logout(logout -> logout.logoutSuccessHandler(new SecurityLogoutSuccessHandler()));
-        http.exceptionHandling(cus -> cus.authenticationEntryPoint(new SecurityAuthenticationEntryPoint()));
+
+        http.exceptionHandling
+        (
+            cus ->
+            {
+                cus.authenticationEntryPoint(new SecurityAuthenticationEntryPoint());
+                cus.accessDeniedHandler(new SecurityAccessDeniedHandler());
+            }
+        );
+
+
         http.httpBasic();
         http.cors();
         http.csrf(csrf -> csrf.disable());

@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
@@ -12,6 +13,9 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Component;
 import top.liyanxing.springbootstudyuse.entity.TbAccount;
 import top.liyanxing.springbootstudyuse.entity.TbAccountMapper;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -73,6 +77,11 @@ public class DbMemoryUserDetailsManager implements UserDetailsManager, UserDetai
             throw new UsernameNotFoundException(username);
         }
 
+        // 模拟从数据库中查询权限信息
+        List<GrantedAuthority> authorityList = CollUtil.newArrayList();
+        authorityList.add(() -> "USER_LIST");
+        // authorityList.add(() -> "USER_ADD");
+
         // 账号存在的话返回一个User对象，会自动进行验证.
         return new User(username,
                         tbAccountFromDb.getPassword(),
@@ -80,6 +89,6 @@ public class DbMemoryUserDetailsManager implements UserDetailsManager, UserDetai
                         true,
                         true,
                         true,
-                        CollUtil.newArrayList());
+                        authorityList);
     }
 }

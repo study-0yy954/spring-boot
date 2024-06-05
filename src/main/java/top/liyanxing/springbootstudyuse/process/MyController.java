@@ -30,6 +30,18 @@ public class MyController
         return myService.getUserInfo();
     }
 
+    @GetMapping("/user/list")
+    public CommonResult<String> userList()
+    {
+        return CommonResult.successData("你访问了/user/list接口");
+    }
+
+    @PostMapping("/user/add")
+    public CommonResult<String> userAdd()
+    {
+        return CommonResult.successData("你访问了/user/add接口");
+    }
+
     @PostMapping("/public/saveAccount")
     public CommonResult<String> saveAccount(@RequestBody TbAccount account)
     {
