@@ -36,7 +36,7 @@ public class MyController
 
 
     @GetMapping("/user/list")
-    @PreAuthorize("hasRole('ADMIN1')")
+    @PreAuthorize("hasRole('ADMIN')")
     public CommonResult<String> userList()
     {
         return CommonResult.successData("你访问了/user/list接口");
