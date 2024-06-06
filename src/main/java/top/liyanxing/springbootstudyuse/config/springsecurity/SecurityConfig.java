@@ -22,9 +22,6 @@ public class SecurityConfig
             .successHandler(new SecurityAuthenticationSuccessHandler())
             .failureHandler(new SecurityAuthenticationFailureHandler());
 
-        http.sessionManagement(session -> session.maximumSessions(1).expiredSessionStrategy(new SecuritySessionInformationExpiredStrategy()));
-        http.logout(logout -> logout.logoutSuccessHandler(new SecurityLogoutSuccessHandler()));
-
         http.exceptionHandling
         (
             cus ->
@@ -34,7 +31,8 @@ public class SecurityConfig
             }
         );
 
-
+        http.sessionManagement(session -> session.maximumSessions(1).expiredSessionStrategy(new SecuritySessionInformationExpiredStrategy()));
+        http.logout(logout -> logout.logoutSuccessHandler(new SecurityLogoutSuccessHandler()));
         http.httpBasic();
         http.cors();
         http.csrf(csrf -> csrf.disable());
