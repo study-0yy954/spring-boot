@@ -78,7 +78,7 @@ public class DbMemoryUserDetailsManager implements UserDetailsManager, UserDetai
                    .disabled(!tbAccountFromDb.getEnable())
                    .credentialsExpired(false)
                    .accountLocked(false)
-                   .roles("ADMIN")
+                   .roles("ADMIN", "MANAGER")
                    .build();
     }
 }
