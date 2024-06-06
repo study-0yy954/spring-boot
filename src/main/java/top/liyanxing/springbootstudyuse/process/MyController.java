@@ -2,6 +2,7 @@ package top.liyanxing.springbootstudyuse.process;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,8 @@ public class MyController
     @Autowired
     private MyService myService;
 
+
+
     @GetMapping("/beans")
     public CommonResult<String[]> beans()
     {
@@ -30,17 +33,23 @@ public class MyController
         return myService.getUserInfo();
     }
 
+
+
     @GetMapping("/user/list")
+    @PreAuthorize("hasRole('ADMIN')")
     public CommonResult<String> userList()
     {
         return CommonResult.successData("你访问了/user/list接口");
     }
 
     @PostMapping("/user/add")
+    @PreAuthorize("hasRole('MANAGER')")
     public CommonResult<String> userAdd()
     {
         return CommonResult.successData("你访问了/user/add接口");
     }
+
+
 
     @PostMapping("/public/saveAccount")
     public CommonResult<String> saveAccount(@RequestBody TbAccount account)
