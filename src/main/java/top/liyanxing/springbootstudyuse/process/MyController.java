@@ -36,7 +36,7 @@ public class MyController
 
 
     @GetMapping("/user/list")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') and authentication.name == leeyx") // 拥有ADMIN角色 并且 登录名是leeyx 才可以访问此接口
     public CommonResult<String> userList()
     {
         return CommonResult.successData("你访问了/user/list接口");

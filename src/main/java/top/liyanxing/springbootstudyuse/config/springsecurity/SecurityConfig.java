@@ -15,6 +15,7 @@ public class SecurityConfig
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
         http.authorizeRequests()
+                // .antMatchers("/user/add").hasRole("MANAGER")
             .antMatchers("/public/**").permitAll()
             .anyRequest().authenticated();
 
