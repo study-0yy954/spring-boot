@@ -7,3 +7,10 @@ spring:
     jackson:
         serialization:
           fail-on-empty-beans: false
+    security:
+        oauth2:
+            client:
+                registration:
+                    github:
+                        client-id: Ov23liJwdFOZTOGuzPEK
+                        client-secret: c3945cf423603e82eb4deff87f185fc3fe5b4783
