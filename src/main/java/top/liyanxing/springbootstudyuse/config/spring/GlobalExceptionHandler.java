@@ -1,7 +1,9 @@
 package top.liyanxing.springbootstudyuse.config.spring;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
+import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import top.liyanxing.common.CommonResult;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +36,11 @@ public class GlobalExceptionHandler
             List<ObjectError> allErrors = validException.getBindingResult().getAllErrors();
             String errorMsg = allErrors.stream().map(ObjectError::getDefaultMessage).collect(Collectors.joining("、"));
             return CommonResult.errorMsg("全局捕获异常【{}】", errorMsg);
+        }
+        if (e instanceof AccessDeniedException)
+        {
+            String error = StrUtil.format("您没有权限访问此接口【{}】", e.getMessage());
+            return CommonResult.errorMsg(error);
         }
         return CommonResult.errorMsg("全局捕获异常【{}】", ExceptionUtil.stacktraceToOneLineString(e));
     }
