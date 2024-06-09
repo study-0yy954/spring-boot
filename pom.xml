@@ -48,6 +48,12 @@
             <groupId>top.liyanxing</groupId>
             <artifactId>lyx-common</artifactId>
             <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hutool-all</artifactId>
+                    <groupId>cn.hutool</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
